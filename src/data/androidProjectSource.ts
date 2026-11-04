@@ -7,6 +7,62 @@ export interface AndroidSourceFile {
 
 export const ANDROID_KOTLIN_FILES: AndroidSourceFile[] = [
   {
+    path: '.github/workflows/build-apk.yml',
+    title: 'GitHub Actions — Gerador Automático de APK na Nuvem',
+    module: 'GitHub Actions APK',
+    code: `name: Gerar APK Android — KAMY Music Player
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-android-apk:
+    name: Compilar KAMY APK (100% Offline)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Baixar código do repositório
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 3. Configurar Java JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: 4. Configurar Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: 5. Instalar dependências e compilar o KAMY Offline Bundle
+        run: |
+          npm install
+          npm run build
+
+      - name: 6. Empacotar projeto Android e gerar APK com Gradle
+        run: |
+          npm install @capacitor/core @capacitor/cli @capacitor/android --no-save
+          if [ ! -d "android" ]; then
+            npx cap add android
+          fi
+          npx cap sync android
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: 7. Disponibilizar KAMY-Music-Player.apk para Download
+        uses: actions/upload-artifact@v4
+        with:
+          name: KAMY-Music-Player-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk`,
+  },
+  {
     path: 'app/build.gradle.kts',
     title: 'Gradle Build Config (Kotlin, Compose, Room, Media3 ExoPlayer)',
     module: 'Build & APK',

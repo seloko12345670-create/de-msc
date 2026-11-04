@@ -223,6 +223,65 @@ export const SettingsAndAndroidView: React.FC<SettingsAndAndroidViewProps> = ({
         </div>
       </div>
 
+      {/* Step-by-Step Guide: How to Generate APK on GitHub Actions */}
+      <section className="rounded-3xl bg-[#121212] border border-[#FF4FA3]/35 p-6 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span className="text-[11px] font-extrabold tracking-wider text-[#FF4FA3]">
+              COMPILAÇÃO NA NUVEM • SEM PRECISAR DE PC POTENTE
+            </span>
+            <h2 className="text-lg font-extrabold text-white mt-0.5">
+              Como Gerar o APK Instalável pelo GitHub (Passo a Passo)
+            </h2>
+          </div>
+          <span className="text-xs font-mono-tabular text-[#FFB6D5] bg-[#FF4FA3]/15 border border-[#FF4FA3]/30 px-3 py-1 rounded-full self-start sm:self-auto">
+            .github/workflows/build-apk.yml Incluso
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+          <div className="p-4 rounded-2xl bg-[#080808] border border-white/5 space-y-1.5">
+            <span className="text-xs font-extrabold font-mono-tabular text-[#FF4FA3]">
+              PASSO 1
+            </span>
+            <h3 className="text-sm font-bold text-white">Exportar para o GitHub</h3>
+            <p className="text-xs text-[#A0A0A0] leading-relaxed">
+              Clique no botão de exportar/salvar no GitHub no topo do AI Studio (ou baixe o ZIP do projeto e suba em um repositório novo no seu GitHub).
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-[#080808] border border-white/5 space-y-1.5">
+            <span className="text-xs font-extrabold font-mono-tabular text-[#FF4FA3]">
+              PASSO 2
+            </span>
+            <h3 className="text-sm font-bold text-white">Abrir a Aba Actions</h3>
+            <p className="text-xs text-[#A0A0A0] leading-relaxed">
+              No seu repositório do GitHub, toque na aba <strong>Actions</strong>. O fluxo <strong>&ldquo;Gerar APK Android — KAMY Music Player&rdquo;</strong> já está configurado automaticamente.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-[#080808] border border-white/5 space-y-1.5">
+            <span className="text-xs font-extrabold font-mono-tabular text-[#FF4FA3]">
+              PASSO 3
+            </span>
+            <h3 className="text-sm font-bold text-white">Aguardar 2 Minutos</h3>
+            <p className="text-xs text-[#A0A0A0] leading-relaxed">
+              O servidor do GitHub instala o Java 21, o Android SDK e roda o Gradle para empacotar o aplicativo 100% offline.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-[#080808] border border-white/5 space-y-1.5">
+            <span className="text-xs font-extrabold font-mono-tabular text-[#FF4FA3]">
+              PASSO 4
+            </span>
+            <h3 className="text-sm font-bold text-white">Baixar e Instalar o APK</h3>
+            <p className="text-xs text-[#A0A0A0] leading-relaxed">
+              Clique na execução concluída (ícone verde) e, na seção <strong>Artifacts</strong> no final da página, baixe o <strong>KAMY-Music-Player-APK</strong> no celular!
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Native Android Project (Kotlin + Jetpack Compose + Room + Media3 ExoPlayer) */}
       <section className="rounded-3xl bg-[#121212] border border-white/10 p-6 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -232,10 +291,10 @@ export const SettingsAndAndroidView: React.FC<SettingsAndAndroidViewProps> = ({
             </div>
             <div>
               <h2 className="text-base font-bold text-white">
-                Projeto Android Nativo (Kotlin • Jetpack Compose • Room • Media3 ExoPlayer)
+                Workflow GitHub Actions &amp; Código Android (Kotlin • Room • Media3)
               </h2>
               <p className="text-xs text-[#A0A0A0]">
-                Módulos prontos para compilação de APK nativo no Android Studio com MediaSessionService em segundo plano
+                Inspecione ou baixe o arquivo build-apk.yml e os módulos nativos Kotlin
               </p>
             </div>
           </div>
@@ -254,7 +313,7 @@ export const SettingsAndAndroidView: React.FC<SettingsAndAndroidViewProps> = ({
               ) : (
                 <>
                   <Copy className="w-3.5 h-3.5" />
-                  <span>Copiar Código</span>
+                  <span>Copiar Arquivo</span>
                 </>
               )}
             </button>
@@ -265,7 +324,7 @@ export const SettingsAndAndroidView: React.FC<SettingsAndAndroidViewProps> = ({
               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#FF4FA3] hover:bg-[#FF2D95] text-xs font-bold text-black cursor-pointer"
             >
               <Smartphone className="w-3.5 h-3.5" />
-              <span>Baixar Arquivo .kt</span>
+              <span>Baixar Arquivo</span>
             </button>
           </div>
         </div>

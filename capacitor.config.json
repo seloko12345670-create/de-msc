@@ -1,0 +1,19 @@
+{
+  "appId": "com.kamy.musicplayer",
+  "appName": "KAMY",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "backgroundColor": "#080808",
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1200,
+      "backgroundColor": "#080808",
+      "showSpinner": false
+    }
+  }
+}
