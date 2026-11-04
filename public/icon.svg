@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="kamyBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#160812" />
+      <stop offset="50%" stop-color="#080808" />
+      <stop offset="100%" stop-color="#1F0A18" />
+    </linearGradient>
+    <linearGradient id="kamyPink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFB6D5" />
+      <stop offset="50%" stop-color="#FF4FA3" />
+      <stop offset="100%" stop-color="#FF2D95" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="115" fill="url(#kamyBg)" />
+  <rect x="24" y="24" width="464" height="464" rx="96" fill="none" stroke="#FF4FA3" stroke-opacity="0.25" stroke-width="4" />
+  <g transform="translate(136, 116)">
+    <path d="M80 28V204" stroke="url(#kamyPink)" stroke-width="28" stroke-linecap="round" />
+    <path d="M220 4V180" stroke="url(#kamyPink)" stroke-width="28" stroke-linecap="round" />
+    <path d="M80 48L220 20" stroke="url(#kamyPink)" stroke-width="32" stroke-linecap="round" />
+    <path d="M80 100L220 72" stroke="#FFB6D5" stroke-width="20" stroke-linecap="round" stroke-opacity="0.8" />
+    <circle cx="48" cy="208" r="42" fill="url(#kamyPink)" />
+    <circle cx="188" cy="184" r="42" fill="url(#kamyPink)" />
+  </g>
+</svg>

@@ -1,0 +1,6 @@
+{
+  "name": "KAMY — Offline Music Player",
+  "description": "Your Music. Your World. Reprodutor de música premium 100% offline com banco de dados local persistente, equalizador e estatísticas reais de reprodução.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

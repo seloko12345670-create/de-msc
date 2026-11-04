@@ -1,0 +1,26 @@
+{
+  "id": "/",
+  "name": "KAMY — Premium Offline Music Player",
+  "short_name": "KAMY",
+  "description": "Your Music. Your World. Reprodutor de música 100% offline com estatísticas reais e armazenamento local permanente.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#FF4FA3",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
