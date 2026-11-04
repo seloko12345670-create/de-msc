@@ -8,13 +8,13 @@ export interface AndroidSourceFile {
 export const ANDROID_KOTLIN_FILES: AndroidSourceFile[] = [
   {
     path: '.github/workflows/build-apk.yml',
-    title: 'GitHub Actions — Gerador Automático de APK na Nuvem',
+    title: 'GitHub Actions — Gerador Automático de APK (CORRIGIDO)',
     module: 'GitHub Actions APK',
     code: `name: Gerar APK Android — KAMY Music Player
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "*" ]
   workflow_dispatch:
 
 jobs:
@@ -26,12 +26,12 @@ jobs:
       - name: 1. Baixar código do repositório
         uses: actions/checkout@v4
 
-      - name: 2. Configurar Node.js 20
+      - name: 2. Configurar Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
-      - name: 3. Configurar Java JDK 21
+      - name: 3. Configurar Java JDK 21 (exigido pelo Android Gradle & Capacitor 7)
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -40,27 +40,70 @@ jobs:
       - name: 4. Configurar Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: 5. Instalar dependências e compilar o KAMY Offline Bundle
+      - name: 5. Ajustar versões para o NPM público e compilar o KAMY Offline
         run: |
-          npm install
+          node -e '
+          const fs = require("fs");
+          const pkg = {
+            name: "kamy-music-player",
+            private: true,
+            version: "2.0.0",
+            type: "module",
+            scripts: {
+              build: "vite build"
+            },
+            dependencies: {
+              "lucide-react": "^0.475.0",
+              "react": "^19.0.0",
+              "react-dom": "^19.0.0",
+              "@capacitor/core": "7.0.0",
+              "@capacitor/android": "7.0.0"
+            },
+            devDependencies: {
+              "@capacitor/cli": "7.0.0",
+              "@tailwindcss/vite": "^4.0.6",
+              "@types/node": "^22.10.0",
+              "@types/react": "^19.0.0",
+              "@types/react-dom": "^19.0.0",
+              "@vitejs/plugin-react": "^4.3.4",
+              "tailwindcss": "^4.0.6",
+              "typescript": "^5.7.2",
+              "vite": "^6.1.0"
+            }
+          };
+          fs.writeFileSync("package.json", JSON.stringify(pkg, null, 2));
+          const capCfg = {
+            appId: "com.kamy.musicplayer",
+            appName: "KAMY",
+            webDir: "dist",
+            backgroundColor: "#080808"
+          };
+          fs.writeFileSync("capacitor.config.json", JSON.stringify(capCfg, null, 2));
+          '
+          rm -f package-lock.json
+          npm install --legacy-peer-deps
           npm run build
 
-      - name: 6. Empacotar projeto Android e gerar APK com Gradle
+      - name: 6. Gerar projeto Android Nativo e compilar APK via Gradle
         run: |
-          npm install @capacitor/core @capacitor/cli @capacitor/android --no-save
-          if [ ! -d "android" ]; then
-            npx cap add android
-          fi
+          rm -rf android
+          npx cap add android
           npx cap sync android
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug --no-daemon
 
-      - name: 7. Disponibilizar KAMY-Music-Player.apk para Download
+      - name: 7. Copiar APK final para KAMY-Music-Player.apk
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk ./KAMY-Music-Player.apk
+          ls -lh ./KAMY-Music-Player.apk
+
+      - name: 8. Disponibilizar KAMY-Music-Player-APK para Download
         uses: actions/upload-artifact@v4
         with:
           name: KAMY-Music-Player-APK
-          path: android/app/build/outputs/apk/debug/app-debug.apk`,
+          path: ./KAMY-Music-Player.apk
+          if-no-files-found: error`,
   },
   {
     path: 'app/build.gradle.kts',
